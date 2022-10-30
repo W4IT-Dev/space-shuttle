@@ -34,32 +34,34 @@
         </div>
         <div id="mainsettings">
             <h3>Sounds:</h3>
-            <button id="music" tabindex="1" class="settingsSoundsButton"><img id="musicIcon"
+            <button id="music" tabindex="0" class="settingsSoundsButton"><img id="musicIcon"
                     src="/img/buttons/musicButton.png"></button>
-            <button id="sound" tabindex="2" class="settingsSoundsButton"><img id="soundIcon"
+            <button id="sound" tabindex="1" class="settingsSoundsButton"><img id="soundIcon"
                     src="/img/buttons/soundsButton.png"></button>
             <h3>Game Mode:</h3>
-            <button id="easy" tabindex="1" class="gameModeButton">Easy</button>
-            <button id="medium" tabindex="2" class="gameModeButton">Medium</button>
-            <button id="hard" tabindex="3" class="gameModeButton">Hard</button>
+            <button id="easy" tabindex="0" class="gameModeButton">Easy</button>
+            <button id="medium" tabindex="1" class="gameModeButton">Medium</button>
+            <button id="hard" tabindex="2" class="gameModeButton">Hard</button>
         </div>
     </div>
 
     <div id="pause">
         <h1>Paused</h1>
         <div id="pauseButtons">
-            <button id="pauseStart"><img class="pauseButton" id="pauseStartIcon"
+            <button tabindex="0" class="pauseBtn" id="pauseStart"><img class="pauseButton" id="pauseStartIcon"
                     src="img/buttons/playButton.png"></button>
-            <button id="pauseRestart"><img class="pauseButton" id="pauseRestartIcon"
+            <button tabindex="1" class="pauseBtn" id="pauseRestart"><img class="pauseButton" id="pauseRestartIcon"
                     src="img/buttons/restartButton.png"></button>
-            <button id="pauseHome"><img class="pauseButton" id="pauseHomeIcon"
+            <button tabindex="2" class="pauseBtn" id="pauseHome"><img class="pauseButton" id="pauseHomeIcon"
                     src="img/buttons/homeButton.png"></button>
 
         </div>
         <div id="pauseSoundButtons">
             <h3>Sounds:</h3>
-            <button id="pauseMusicBtn"><img id="pauseMusicIcon" src="/img/buttons/musicButton.png"></button>
-            <button id="pauseSoundsBtn"><img id="pauseSoundsIcon" src="/img/buttons/soundsButton.png"></button>
+            <button tabindex="0" class="musicAudioBtn" id="pauseMusicBtn"><img id="pauseMusicIcon"
+                    src="/img/buttons/musicButton.png"></button>
+            <button tabindex="1" class="musicAudioBtn" id="pauseSoundsBtn"><img id="pauseSoundsIcon"
+                    src="/img/buttons/soundsButton.png"></button>
         </div>
     </div>
 
@@ -67,8 +69,9 @@
         <h3 id="score"></h3>
         <h3 id="highScore"></h3>
         <div id="buttons">
-            <button id="restart"><img id="restartIcon" src="img/buttons/restartButton.png"></button>
-            <button id="home"><img id="homeIcon" src="img/buttons/homeButton.png"></button>
+            <button tabindex="0" class="deadBtn" id="restart"><img id="restartIcon"
+                    src="img/buttons/restartButton.png"></button>
+            <button tabindex="1" class="deadBtn" id="home"><img id="homeIcon" src="img/buttons/homeButton.png"></button>
         </div>
     </div>
 

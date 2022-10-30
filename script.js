@@ -24,18 +24,18 @@ let on3 = false;
 let on4
 let ingame = false;
 
-let music = new Audio("img/sounds/music.mp3");
+let gamemusic = new Audio("img/sounds/music.mp3");
 let shotSound = new Audio("img/sounds/shot.wav");
 let explosionSound = new Audio("img/sounds/explosion.mp3");
 
 let soundEffects = true;
 
-music.loop = true;
-music.volume = 0.6;
+gamemusic.loop = true;
+gamemusic.volume = 0.6;
 shotSound.volume = 0.4;
 explosionSound.volume = 0.4;
 
-music.play();
+gamemusic.play();
 let musicpause = false;
 
 let allUfos = [];
@@ -88,88 +88,23 @@ document.addEventListener('keydown', (e) => {
         //Settings
         if (onsettings) {
             if (e.key == 'ArrowDown') {
-                console.log('.' + document.activeElement.className)
-                console.log(document.activeElement.id)
                 nav(1, '.' + document.activeElement.className);
-                // if (element(document.getElementById('music'))) {
-                //     sound.focus();
-                // } else if (element(sound)) {
-                //     document.getElementById('music').focus();
-                // } else if (element(document.getElementById('option-mainsettings'))) {
-                //     document.getElementById('option-info').focus();
-                //     mainsettings.style.display = "none";
-                //     info.style.display = "block";
-                //     oninfo = true;
-                //     onmainsettings = false;
-                // } else if (element(document.getElementById('option-info'))) {
-                //     document.getElementById("option-mainsettings").focus();
-                //     info.style.display = "none";
-                //     mainsettings.style.display = "block";
-                //     oninfo = false;
-                //     onmainsettings = true;
-                // } else if (element(easy)) {
-                //     medium.focus();
-                // } else if (element(medium)) {
-                //     hard.focus();
-                // } else if (element(hard)) {
-                //     easy.focus();
-                // }
             }
-
 
             if (e.key == 'ArrowUp') {
-                if (element(document.getElementById('music'))) {
-                    sound.focus();
-                } else if (element(sound)) {
-                    document.getElementById('music').focus();
-                } else if (element(document.getElementById('option-mainsettings'))) {
-                    document.getElementById('option-info').focus();
-                    mainsettings.style.display = "none";
-                    info.style.display = "block";
-                    onmainsettings = false;
-                    oninfo = true;
-
-                } else if (element(document.getElementById('option-info'))) {
-                    document.getElementById("option-mainsettings").focus();
-                    info.style.display = "none";
-                    mainsettings.style.display = "block";
-                    oninfo = false;
-                    onmainsettings = true;
-                } else if (element(easy)) {
-                    hard.focus();
-                } else if (element(medium)) {
-                    easy.focus();
-                } else if (element(hard)) {
-                    medium.focus();
-                }
+                nav(-1, '.' + document.activeElement.className);
             }
-
 
             if (e.key == 'ArrowRight') {
-                if (element(document.getElementById('option-mainsettings'), document.getElementById("option-info"))) {
-                } else if (element(document.getElementById('music'), sound)) {
-                    document.getElementById("option-mainsettings").focus();
-                } else if (element(easy, medium, hard)) {
+                if (element(easy, medium, hard)) {
                     document.getElementById('music').focus();
-
                 }
-                move_down();
-
             }
 
-
             if (e.key == 'ArrowLeft') {
-                if (element(document.getElementById('option-mainsettings'), document.getElementById("option-info"))) {
-                    document.getElementById('music').focus();
-                    if (oninfo) {
-                        document.getElementById('option-info').style.backgroundColor = 'rgb(120, 120, 120)';
-                    } else if (onmainsettings) {
-                        document.getElementById('option-mainsettings').style.backgroundColor = 'rgb(120, 120, 120)';
-                    }
-                } else if (element(document.getElementById('music'), sound)) {
+                if (element(document.getElementById('music'), document.getElementById('sound'))) {
                     document.getElementById(gameDifficulty).focus();
                 }
-                move_up();
             }
         }
 
@@ -184,7 +119,7 @@ document.addEventListener('keydown', (e) => {
             }
             if (e.key == 'VolumeUp') {
                 e.preventDefault();
-                music.play();
+                gamemusic.play();
                 musicpause = false;
                 soundEffects = true;
                 volume.src = "img/volume.png";
@@ -201,7 +136,7 @@ document.addEventListener('keydown', (e) => {
             }
             if (e.key == 'VolumeDown') {
                 e.preventDefault();
-                music.pause();
+                gamemusic.pause();
                 musicpause = true;
                 if (document.activeElement == pauseMusicBtn) {
                     pauseMusicIcon.src = "img/buttons/noMusicButtonFocus.png";
@@ -217,51 +152,22 @@ document.addEventListener('keydown', (e) => {
                 volume.src = "img/novolume.png";
             }
 
-            if (e.key == '6') {
+            if (e.key == '6' || e.key == 'ArrowRight') {
                 upKey = true;
             }
-            if (e.key == '4') {
+            if (e.key == '4' || e.key == 'ArrowLeft') {
                 downKey = true;
             }
-            if (e.key == '5') {
-                shootKey = true;
-            }
-            if (e.key == 'ArrowLeft') {
-                downKey = true;
-            }
-            if (e.key == 'ArrowRight') {
-                upKey = true;
-            }
-            if (e.key == 'Enter') {
+            if (e.key == '5' || e.key == 'Enter') {
                 shootKey = true;
             }
             //Pause Screen
             if (onpause) {
                 if (e.key == 'ArrowDown') {
-                    if (document.activeElement == pauseStart) {
-                        document.getElementById('pauseRestart').focus();
-                    } else if (document.activeElement == pauseRestart) {
-                        pauseHome.focus();
-                    } else if (document.activeElement == pauseHome) {
-                        pauseStart.focus();
-                    } else if (document.activeElement == pauseMusicBtn) {
-                        pauseSoundsBtn.focus();
-                    } else if (document.activeElement == pauseSoundsBtn) {
-                        pauseMusicBtn.focus();
-                    }
+                    nav(1, '.' + document.activeElement.className)
                 }
                 if (e.key == 'ArrowUp') {
-                    if (document.activeElement == pauseStart) {
-                        pauseHome.focus();
-                    } else if (document.activeElement == pauseRestart) {
-                        pauseStart.focus();
-                    } else if (document.activeElement == pauseHome) {
-                        pauseRestart.focus();
-                    } else if (document.activeElement == pauseMusicBtn) {
-                        pauseSoundsBtn.focus();
-                    } else if (document.activeElement == pauseSoundsBtn) {
-                        pauseMusicBtn.focus();
-                    }
+                    nav(-1, '.' + document.activeElement.className)
                 }
                 if (e.key == 'ArrowLeft') {
                     pauseMusicBtn.focus();
@@ -272,18 +178,13 @@ document.addEventListener('keydown', (e) => {
             }
         }
 
-
         //Restart Screen
         if (dead) {
             if (e.key == 'ArrowDown') {
-                if (document.activeElement == restart) {
-                    home.focus();
-                }
+                nav(1, '.' + document.activeElement.className)
             }
             if (e.key == 'ArrowUp') {
-                if (document.activeElement == home) {
-                    restart.focus();
-                }
+                nav(-1, '.' + document.activeElement.className)
             }
         }
         //Tutorial
@@ -348,22 +249,13 @@ document.addEventListener('keydown', (e) => {
 
 
 document.addEventListener('keyup', (e) => {
-    if (e.key == '6') {
+    if (e.key == '6' || e.key == 'ArrowRight') {
         upKey = false;
     }
-    if (e.key == '4') {
+    if (e.key == '4' || e.key == 'ArrowLeft') {
         downKey = false;
     }
-    if (e.key == '5') {
-        shootKey = false;
-    }
-    if (e.key == 'ArrowRight') {
-        upKey = false;
-    }
-    if (e.key == 'ArrowLeft') {
-        downKey = false;
-    }
-    if (e.key == 'Enter') {
+    if (e.key == '5' || e.key == 'Enter') {
         if (!onhome) {
             shootKey = false;
         }
@@ -372,9 +264,7 @@ document.addEventListener('keyup', (e) => {
 
 
 function getStoredData() {
-    if (!localStorage.getItem("highScore")) {
-        document.getElementById('scoreDisplay').innerHTML = `HighScore: 0`
-    } else {
+    if (localStorage.getItem("highScore")) {
         highScore = localStorage.getItem("highScore");
         document.getElementById('scoreDisplay').innerHTML = `HighScore: ${localStorage.getItem("highScore")}`
     }
@@ -412,7 +302,6 @@ function startGame() {
     startScreen.style.display = "none";
     loadImages();
     startIntervals();
-    // startUfos();
     draw();
     setSoftKeys("Pause", "", "");
 }
@@ -432,12 +321,6 @@ function clearIntervals() {
     clearInterval(ufospawn);
     clearInterval(shootingufos);
 }
-
-// function startUfos() {
-//     ufo.img.src = ufo.src;
-//     allUfos.push(ufo);
-
-// }
 
 function checkForCollion() {
     allUfos.forEach(function (ufo) {
@@ -480,7 +363,6 @@ function checkForCollion() {
                 }
                 gameOver();
             }
-            //check if shot is out of canvas
             if (enemyshot.x < 1) {
                 enemyshots = enemyshots.filter(i => i != enemyshot);
             }
@@ -578,8 +460,6 @@ function UfosShooting() {
 }
 
 function loadImages() {
-    // bGImg = (Math.random();
-    // console.log(bGImg)
     backgroundImage.src = 'img/background1.png';
     rocket.img = new Image();
     rocket.img.src = rocket.src;
@@ -682,11 +562,11 @@ pauseHome.addEventListener("click", function () {
 pauseMusicBtn.addEventListener("click", function () {
     musicpause = !musicpause;
     if (musicpause) {
-        music.pause();
+        gamemusic.pause();
         pauseMusicIcon.src = "img/buttons/noMusicButtonFocus.png";
         musicIcon.src = "img/buttons/noMusicButton.png";
     } else {
-        music.play();
+        gamemusic.play();
         pauseMusicIcon.src = "img/buttons/musicButtonFocus.png";
         musicIcon.src = "img/buttons/musicButton.png";
     }
@@ -716,11 +596,11 @@ pauseSoundsBtn.addEventListener("click", function () {
 document.getElementById("music").addEventListener("click", function () {
     musicpause = !musicpause;
     if (musicpause) {
-        music.pause();
+        gamemusic.pause();
         musicIcon.src = "img/buttons/noMusicButtonFocus.png";
         pauseMusicIcon.src = "img/buttons/noMusicButton.png";
     } else {
-        music.play();
+        gamemusic.play();
         musicIcon.src = "img/buttons/musicButtonFocus.png";
         pauseMusicIcon.src = "img/buttons/musicButton.png";
     }
@@ -906,13 +786,12 @@ function element(one, two, three) {
 
 function nav(move, elems) {
     const currentIndex = document.activeElement.tabIndex;
-    const next = currentIndex + move;
     const items = document.querySelectorAll(elems);
+    const next = currentIndex + move;
     const targetElement = items[next];
-    console.log(currentIndex, next, items, targetElement)
 
-    // if (move === 1 && currentIndex == items.length - 1) return items[0].focus();
-    // if (move === -1 && currentIndex == 0) return items[items.length - 1].focus();
+    if (move === 1 && currentIndex == items.length - 1) return items[0].focus();
+    if (move === -1 && currentIndex == 0) return items[items.length - 1].focus();
 
     targetElement.focus();
 }
