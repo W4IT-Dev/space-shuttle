@@ -1,0 +1,30 @@
+{
+   "version":"1.0.0",
+   "name":"Space Shuttle",
+   "description":"Use your skills to shoot all the aliens in the space down!",
+   "type":"web",
+   "launch_path":"/index.html",
+   "icons":{
+      "56":"/img/icons/icon.png",
+      "128":"/img/icons/icon.png"
+   },
+   "developer":{
+      "name":"W4IT Dev",
+      "url":" https://www.kaiostech.com/"
+   },
+   "locales":{
+      "en-US":{
+         "name":"Space Shuttle",
+         "subtitle":"Use your skills to shoot all the aliens in the space down!",
+         "description":"A simple solo player game to have fun and kill boredom!\nUse your D-Pad to move and Enter to shoot!"
+      }
+   },
+   "default_locale":"en-US",
+   "categories":[
+      "games"
+   ],
+   "orientation":[
+      "landscape-primary"
+   ],
+   "fullscreen":"true"
+}

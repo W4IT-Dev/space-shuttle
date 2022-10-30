@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body onload="getStoredData();">
+    <div id="topBar">
+        <img id="volume" src="img/volume.png">
+        <div id="scoreDisplay">HighScore: 0</div>
+    </div>
+
+    <div id="startScreen">
+        <img id="logo" src="img/logo.png">
+        <button id="start"><img id="startIcon" src="img/buttons/playButton.png"></button>
+    </div>
+
+    <div id="tutorial">
+        <div id="tutorialImgAp">
+            <img id="tutorialImage" src="img/tutorial/tutorial_1.gif">
+            <p id="tutorialParagraph">To pause the game, press the left softkey.</p>
+        </div>
+        <div id="loadingScreen">
+            <h3 id="loadingProgress">0%</h3>
+            <progress value="0" id="loadingProgressbar"></progress>
+        </div>
+    </div>
+
+    <div id="settings">
+        <div id="setting-options">
+            <div tabindex="-1" class="settings-options" id="option-mainsettings">Main</div>
+        </div>
+        <div id="mainsettings">
+            <h3>Sounds:</h3>
+            <button id="music" tabindex="1" class="settingsSoundsButton"><img id="musicIcon"
+                    src="/img/buttons/musicButton.png"></button>
+            <button id="sound" tabindex="2" class="settingsSoundsButton"><img id="soundIcon"
+                    src="/img/buttons/soundsButton.png"></button>
+            <h3>Game Mode:</h3>
+            <button id="easy" tabindex="1" class="gameModeButton">Easy</button>
+            <button id="medium" tabindex="2" class="gameModeButton">Medium</button>
+            <button id="hard" tabindex="3" class="gameModeButton">Hard</button>
+        </div>
+    </div>
+
+    <div id="pause">
+        <h1>Paused</h1>
+        <div id="pauseButtons">
+            <button id="pauseStart"><img class="pauseButton" id="pauseStartIcon"
+                    src="img/buttons/playButton.png"></button>
+            <button id="pauseRestart"><img class="pauseButton" id="pauseRestartIcon"
+                    src="img/buttons/restartButton.png"></button>
+            <button id="pauseHome"><img class="pauseButton" id="pauseHomeIcon"
+                    src="img/buttons/homeButton.png"></button>
+
+        </div>
+        <div id="pauseSoundButtons">
+            <h3>Sounds:</h3>
+            <button id="pauseMusicBtn"><img id="pauseMusicIcon" src="/img/buttons/musicButton.png"></button>
+            <button id="pauseSoundsBtn"><img id="pauseSoundsIcon" src="/img/buttons/soundsButton.png"></button>
+        </div>
+    </div>
+
+    <div id="restartScreen">
+        <h3 id="score"></h3>
+        <h3 id="highScore"></h3>
+        <div id="buttons">
+            <button id="restart"><img id="restartIcon" src="img/buttons/restartButton.png"></button>
+            <button id="home"><img id="homeIcon" src="img/buttons/homeButton.png"></button>
+        </div>
+    </div>
+
+    <div id="exit">
+        <h3>Do you really want to exit?</h3>
+        <div id="options">
+            <div id="no">No</div>
+            <div id="yes">Yes</div>
+        </div>
+    </div>
+
+    <canvas id="canvas" width="317" height="210"></canvas>
+
+    <footer id="softkey">
+        <div id="softkeyLeft">Settings</div>
+        <div id="softkeyEnter"></div>
+        <div id="softkeyRight">Tutorial</div>
+    </footer>
+</body>
+
+</html>
