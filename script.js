@@ -3,13 +3,13 @@ let canvas, ctx;
 let backgroundImage = new Image();
 let rocket;
 
-let spawnTime = 2100;
+let spawnTime = 2200;
 let score = 0;
 let highScore = 0;
 let dead = false;
 let gameDifficulty = 'medium';
 
-let updateinterval, ufospawn, checkcollion, checkshoot, shootingufos;
+let updateinterval, ufospawn, miniufospawn, checkcollion, checkshoot, shootingufos;
 
 let onhome = true;
 let onexit = false;
@@ -43,7 +43,7 @@ let shots = [];
 let enemyshots = [];
 
 document.addEventListener('keydown', (e) => {
-    if (e.key == 'MicrophoneToggle' || e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'ArrowUp' || e.key == 'ArrowDown') { e.preventDefault(); }
+    if (e.key == 'MicrophoneToggle' || e.key.includes('Arrow')) { e.preventDefault(); }
 
     if (e.key == 'Backspace') {
         e.preventDefault();
@@ -309,8 +309,9 @@ function startGame() {
 function startIntervals() {
     updateinterval = setInterval(update, 40);
     checkcollion = setInterval(checkForCollion, 40);
-    checkshoot = setInterval(checkForShoot, 350);
+    checkshoot = setInterval(checkForShoot, 300);
     ufospawn = setInterval(createUfo, spawnTime);
+    miniufospawn = setInterval(miniUfo, 1800)
     shootingufos = setInterval(UfosShooting, 2000);
 }
 
@@ -320,6 +321,7 @@ function clearIntervals() {
     clearInterval(checkshoot);
     clearInterval(ufospawn);
     clearInterval(shootingufos);
+    clearInterval(miniufospawn)
 }
 
 function checkForCollion() {
@@ -337,8 +339,9 @@ function checkForCollion() {
                     } else {
                         scoreAdd(50);
                     }
-                    shots = shots.filter(i => i != shot);
+
                 }
+                shots = shots.filter(i => i != shot);
                 ufo.hit = true;
                 ufo.img.src = 'img/boom.png';
                 if (soundEffects) {
@@ -370,6 +373,36 @@ function checkForCollion() {
     });
 }
 
+function miniUfo() {
+    let ufo = {
+        x: 320,
+        y: Math.random() * 190,
+        width: 47,
+        height: 25,
+        src: 'img/miniufo.png',
+        img: new Image(),
+        speed: 3.5
+    }
+    let ufo2 = {
+        x: 320,
+        y: Math.random() * 190,
+        width: 42,
+        height: 25,
+        src: 'img/miniufo.png',
+        img: new Image(),
+        speed: 4.1
+    }
+    ufo.speed += score / 1000;
+    ufo.img.src = ufo.src;
+    allUfos.push(ufo);
+    ufo2.speed += score / 1000;
+    ufo2.img.src = ufo2.src;
+    setTimeout(() => {
+        allUfos.push(ufo2)
+    }, 800)
+
+}
+
 function createUfo() {
     fastUfoChance = Math.random();
     let ufo = {
@@ -387,14 +420,28 @@ function createUfo() {
         ufo.speed = 2.7;
     }
     ufo.speed += score / 1000;
-    if (score > 500) {
-        chance = Math.random();
-        if (chance >= 0.45) {
-            ufo.shooting = true;
-        }
-    }
+    addShootin(ufo);
+    
     ufo.img.src = ufo.src;
     allUfos.push(ufo);
+}
+
+function addShootin(a){
+    if (score >= 1000) {
+        chance = Math.random();
+        if (chance >= 0.25) {
+            a.shooting = true;
+            UfosShooting();
+        }
+        return
+    }
+    if (score >= 500) {
+        chance = Math.random();
+        if (chance >= 0.45) {
+            a.shooting = true;
+            UfosShooting();
+        }
+    }
 }
 
 function checkForShoot() {
@@ -418,10 +465,10 @@ function checkForShoot() {
 function update() {
     if (!dead && !onpause) {
         if (upKey && rocket.y > -8) {
-            rocket.y -= 3.6;
+            rocket.y -= 4;
         }
         if (downKey && rocket.y < 183) {
-            rocket.y += 3.6;
+            rocket.y += 4;
         }
         allUfos.forEach(function (ufo) {
             if (!ufo.hit) {
@@ -429,10 +476,10 @@ function update() {
             }
         });
         shots.forEach(function (shot) {
-            shot.x += 3.5;
+            shot.x += 4.2;
         });
         enemyshots.forEach(function (enemyshot) {
-            enemyshot.x -= 5;
+            enemyshot.x -= 5 + score / 1000;
         });
         if (score > highScore) {
             highScore = score;
@@ -450,7 +497,7 @@ function UfosShooting() {
                 y: ufo.y + 13,
                 width: 9,
                 height: 3.2,
-                src: 'img/shot.png',
+                src: 'img/enemyshot.png',
                 img: new Image()
             };
             enemyshot.img.src = enemyshot.src;
@@ -488,7 +535,7 @@ function gameOver() {
     dead = true;
     ingame = false;
     clearIntervals();
-    spawnTime = 2100;
+    spawnTime = 2200;
     restart.focus();
     allUfos = [];
     shots = [];
